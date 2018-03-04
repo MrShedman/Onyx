@@ -29,27 +29,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,7 +84,19 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(USERPROFILE)\source\repos\glew-2.1.0\include;$(USERPROFILE)\source\repos\SFML\include;$(ProjectDir)src;$(USERPROFILE)\source\repos\Assimp-4.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(USERPROFILE)\source\repos\SFML\extlibs\libs-msvc-universal\x64;$(USERPROFILE)\source\repos\glew-2.1.0\lib\Release\x64;$(USERPROFILE)\source\repos\SFML\build\lib\Debug;$(USERPROFILE)\source\repos\Assimp-4.1\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-s-d.lib;sfml-graphics-s-d.lib;sfml-network-s-d.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;flac.lib;freetype.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;opengl32.lib;winmm.lib;gdi32.lib;vorbisfile.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /d "$(USERPROFILE)\source\repos\SFML\extlibs\bin\x64\*.dll" "$(OutDir)"
+xcopy /d "$(USERPROFILE)\source\repos\Assimp-4.1\Debug\*.dll" "$(OutDir)"
+xcopy /d /q /y "$(ProjectDir)res" "$(OutDir)res\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -108,13 +120,62 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(USERPROFILE)\source\repos\glew-2.1.0\include;$(USERPROFILE)\source\repos\SFML\include;$(ProjectDir)src;$(USERPROFILE)\source\repos\Assimp-4.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SFML_STATIC;GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(USERPROFILE)\source\repos\SFML\extlibs\libs-msvc-universal\x64;$(USERPROFILE)\source\repos\glew-2.1.0\lib\Release\x64;$(USERPROFILE)\source\repos\SFML\build\lib\Release;$(USERPROFILE)\source\repos\Assimp-4.1\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio-s.lib;sfml-graphics-s.lib;sfml-network-s.lib;sfml-system-s.lib;sfml-window-s.lib;flac.lib;freetype.lib;ogg.lib;openal32.lib;vorbis.lib;vorbisenc.lib;opengl32.lib;winmm.lib;gdi32.lib;vorbisfile.lib;glew32s.lib;assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /d "$(USERPROFILE)\source\repos\SFML\extlibs\bin\x64\*.dll" "$(OutDir)"
+xcopy /d "$(USERPROFILE)\source\repos\Assimp-4.1\Release\*.dll" "$(OutDir)"
+xcopy /d /q /y "$(ProjectDir)res" "$(OutDir)res\"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Application.hpp" />
+    <ClInclude Include="src\buffers\VBO.hpp" />
+    <ClInclude Include="src\GraphicSystem.hpp" />
+    <ClInclude Include="src\math\AABB.hpp" />
+    <ClInclude Include="src\math\Angle.hpp" />
+    <ClInclude Include="src\math\MathHelper.hpp" />
+    <ClInclude Include="src\math\Matrix.hpp" />
+    <ClInclude Include="src\math\Quaternion.hpp" />
+    <ClInclude Include="src\math\Ray.hpp" />
+    <ClInclude Include="src\math\Rect.hpp" />
+    <ClInclude Include="src\math\Vector.hpp" />
+    <ClInclude Include="src\rendering\Camera.hpp" />
+    <ClInclude Include="src\rendering\Capture.hpp" />
+    <ClInclude Include="src\rendering\Ground.hpp" />
+    <ClInclude Include="src\rendering\Mesh.hpp" />
+    <ClInclude Include="src\rendering\Model.hpp" />
+    <ClInclude Include="src\rendering\Shader.hpp" />
+    <ClInclude Include="src\rendering\Sphere.hpp" />
+    <ClInclude Include="src\rendering\Transform.hpp" />
+    <ClInclude Include="src\rendering\Triangle.hpp" />
+    <ClInclude Include="src\rendering\Vertex.hpp" />
+    <ClInclude Include="src\Utilities.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\buffers\VBO.cpp" />
+    <ClCompile Include="src\GraphicSystem.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\math\Angle.cpp" />
+    <ClCompile Include="src\math\MathHelper.cpp" />
+    <ClCompile Include="src\math\Matrix.cpp" />
+    <ClCompile Include="src\math\Quaternion.cpp" />
+    <ClCompile Include="src\math\Vector.cpp" />
+    <ClCompile Include="src\rendering\Camera.cpp" />
+    <ClCompile Include="src\rendering\Mesh.cpp" />
+    <ClCompile Include="src\rendering\Model.cpp" />
+    <ClCompile Include="src\rendering\Shader.cpp" />
+    <ClCompile Include="src\rendering\Transform.cpp" />
+    <ClCompile Include="src\Utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -259,3 +259,6 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Onyx/sphere_with_tread_3.mtl
+/Onyx/sphere.stl
+/Onyx/sphere.mtl
